@@ -1,5 +1,5 @@
 # Лабораторная работа №1: [C++ & UNIX]: UNIX знакомство: useradd, nano, chmod, docker, GIT, CI, CD #
-Хрусталев И. Д., ФФ ИТМО, Z33434
+Альшевский Д.В., ФФ ИТМО, Z33434
 
 ## Цель
 Познакомить студента с основами администрирования программных комплексов в ОС
@@ -28,23 +28,18 @@
     ```
     3. Создать 2-х пользователей: user_max_1, user_min_1
     ```
-    khrstln@LinuxUbuntu:/usr/local$ sudo useradd user_max_1
-    khrstln@LinuxUbuntu:/usr/local$ sudo useradd user_min_1
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ sudo useradd user_max_1
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ sudo useradd user_min_1
     
-    khrstln@LinuxUbuntu:/usr/local$ members group_max
-    user_max_1
-    
-    khrstln@LinuxUbuntu:/usr/local$ members group_min
-    user_min_1
     ```
     4. Для пользователей из группы *_max дать полный доступ на директории *_max и *_min. Для пользователей группы *_min дать полный доступ только на директорию *_min
     ```
-    khrstln@LinuxUbuntu:/usr/local$ sudo chmod a=rwx folder_min
-    khrstln@LinuxUbuntu:/usr/local$ sudo chmod o-w folder_max
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ sudo chmod a=rwx folder_min
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ sudo chmod o-wx folder_max
     
-    khrstln@LinuxUbuntu:/usr/local$ ls -l
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ ls -l
     ...
-    drwxrwxr-x 2 root    group_max  4096 мар 12 22:17 folder_max
+    drwxrwxr-- 2 root    group_max  4096 мар 12 22:17 folder_max
     drwxrwxrwx 2 root    group_min  4096 мар 12 22:19 folder_min
     ...
     ```
@@ -52,49 +47,49 @@
 
     5. Создать и исполнить (пользователем из той же категории) скрипт в директории folder_max, который пишет текущую дату/время в файл output.log в текущей директории
     ```
-    khrstln@LinuxUbuntu:/usr/local/folder_max$ su - user_max_1
+    dimasik@DESKTOP-KTOS6NV:/usr/local/folder_max$ su - user_max_1
     $ whoami
     user_max_1
-    $ touch date.sh
+    $ touch script_max
     ```
     
     После создания файла в директории folder_max открываем его с помощью команды 
     ```
-    $ nano date.sh
+    $ nano script_max
     ```
     
     Пишем в файл следующий скрипт
     ```
     #!/bin/bash
-    date  >> /usr/local/folder_max/output.log
+    date | tee output.log
     ```
     
       Чтобы исполнить файл, в терминале пишем следующие команды
     ```
-    $ chmod g=rwx date.sh
-    $ ./date.sh
+    $ chmod g=rwx script_max
+    $ ./script_max
     ```
 
     6. Создать и исполнить (пользователем из той же категории) скрипт в директории folder_max, который пишет текущую дату/время в файл output.log в директории *_min
     ```
-    $ touch date_in_min.sh
+    $ touch script_min
     ```
     
     После создания файла в директории folder_max открываем его с помощью команды 
     ```
-    $ nano date_in_min.sh
+    $ nano script_min
     ```
     
     Пишем в файл следующий скрипт
     ```
     #!/bin/bash
-    date  >> /usr/local/folder_min/output_from_max.log
+    date | tee /usr/local/folder_min/output.log
     ```
     
     Чтобы исполнить файл, в терминале пишем следующие команды
     ```
-    $ chmod a=rwx date_in_min.sh
-    $ bash date_in_min.sh
+    $ chmod a=rwx script_min
+    $ bash script_min
     ```
 
 
@@ -104,7 +99,7 @@
     user_min_1
     $ pwd
     /usr/local/folder_max
-    $ bash date_in_min.sh
+    $ bash script_min
     ```
 
 
@@ -114,33 +109,33 @@
     $ cd folder_min
     $ pwd
     /usr/local/folder_min
-    $ touch date_in_max.sh
+    $ touch script_min
     ```
     
     После создания файла в директории folder_max открываем его с помощью команды 
     ```
-    $ nano date_in_max.sh
+    $ nano script_min
     ```
     
     Пишем в файл следующий скрипт
     ```
     #!/bin/bash
-    date  >> /usr/local/folder_max/output_from_min.log
+    date | tee /usr/local/folder_max/output_min.log
     ```
     
     Чтобы исполнить файл, в терминале пишем следующие команды
     ```
-    $ chmod a=rwx date_in_min.sh
-    $ bash date_in_min.sh
+    $ chmod a=rwx script_min
+    $ bash script_min
     ```
     
 
 
     9. Вывести перечень прав доступа у папок *_min/ *_max, а также у всего содержимого внутри
     ```
-    khrstln@LinuxUbuntu:/usr/local$ ls -l
-    drwxrwxr-x 2 root    group_max  4096 мар 23 17:27 folder_max
-    drwxrwxrwx 2 root    group_min  4096 мар 23 18:02 folder_min
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ ls -l
+    drwxrwx--- 2 user_max_1 group_max 4096 Mar 31 21:57 folder_max
+    drwxrwxrwx 2 user_min_1 group_min 4096 Mar 31 21:59 folder_min
     ```
 
 2. [КОНТЕЙНЕР] docker build / run / ps / images
