@@ -150,54 +150,48 @@
     
     2. Собрать образ со скриптами выше и с пакетом nano (docker build)
     ```
-    khrstln@LinuxUbuntu:/usr/local$ sudo docker image build -t myimage .
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ sudo docker image build -t myimage .
     
-    khrstln@LinuxUbuntu:/usr/local$ sudo docker image ls
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ sudo docker image ls
     myimage       latest    a54a4e4feccf   45 minutes ago   121MB
     ```
     3. Запустить образ (docker run)
     ```
-    khrstln@LinuxUbuntu:/usr/local$ sudo docker run -it myimage
-    root@4829ba9bd0e0:/#
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ sudo docker run -it myimage
+    root@37ae38a79cd2:/#
     ```
     
     4. Выполнить скрипт, который подложили при сборке образа
     ```
-    root@4829ba9bd0e0:/# ls
-    bin      dev   lib    libx32  opt   run   sys  var
-    boot     etc   lib32  media   proc  sbin  tmp
-    date.sh  home  lib64  mnt     root  srv   usr
-    root@4829ba9bd0e0:/# ./date.sh
-    Fri Mar 24 12:40:26 UTC 2023
+    root@37ae38a79cd2:/# ls
+    bin   date.sh  etc   lib    lib64   media  opt         proc  run   srv  tmp  var
+    boot  dev      home  lib32  libx32  mnt    output.log  root  sbin  sys  usr
+    root@37ae38a79cd2:/# bash date.sh
+    Fri Mar 31 19:35:33 UTC 2023
+    root@37ae38a79cd2:/#
     ```
     
     5.	Вывести список пользователей в собранном образе
     ```
-    khrstln@LinuxUbuntu:/usr/local$ sudo docker run myimage id
-    uid=0(root) gid=0(root) groups=0(root) 
+    dimasik@DESKTOP-KTOS6NV:/usr/local$ docker run mydocker id
+    uid=0(root) gid=0(root) groups=0(root)
     ```
 
 3. [GIT] GitHub / GitLab, в котором будут содержаться все выполненные ЛР
     1. Создать репозиторий в GitHub или GitLab
     ```
-    khrstln@LinuxUbuntu:/usr/local$ apt install git
-    khrstln@LinuxUbuntu:/usr/local$ git config --global user.name khrstln
-    khrstln@LinuxUbuntu:/usr/local$ git config --global user.email iliss002@mail.ru
-    ```
-    Дальнейшие команды выполняются после добавления в Cpp_and_unix всех необходимых папок и файлов
-    ```
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git init
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git add .
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git commit -m 'Final version'
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git init
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git add .
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git commit -m 'Update'
     ```
     
     2. Создать структуру репозитория
     ```
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ mkdir lab_1
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ cd lab_1
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix/lab_1$ mkdir build
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix/lab_1$ mkdir doc
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix/lab_1$ mkdir src
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ mkdir lab_1
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ cd lab_1
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix/lab_1$ mkdir build
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix/lab_1$ mkdir doc
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix/lab_1$ mkdir src
     ```
     Далее скопируем директории folder_max и folder_min в lab_1
     
@@ -212,30 +206,30 @@
     ```
     Создадим ветки dev, stg, prd
     ```
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git branch dev
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git branch stg
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git branch prd
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git branch
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git branch dev
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git branch stg
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git branch prd
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git branch
       dev
       stg
       prd
       fake
     * main
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git push origin dev
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git push origin stg
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git push origin prd
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git push origin dev
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git push origin stg
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git push origin prd
     ```
     Удалим ветку fake локально и удаленно
     ```
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git branch -d fake
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git branch
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git branch -d fake
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git branch
       dev
       stg
       prd
     * main
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git push origin :fake
-    To github.com:khrstln/Cpp_and_unix.git
-    - [deleted]         fake
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp-and-Unix$ git push origin :fake
+    To github.com:n0tmyself/Cpp-and-Unix.git
+     - [deleted]         fake
     ```
 
     4. Создать скрипт автоматического переноса ревизий из ветки dev в ветку stg с установкой метки времени (tag). Скрипт в корень репозитория
@@ -262,16 +256,3 @@
     git push origin prd
     git push origin "$time_tag"
     ```
-
-Дополнительные вопросы
-Чем контейнер отличается от образа?
-
-
-
-
-
-
-
-
-
-    
