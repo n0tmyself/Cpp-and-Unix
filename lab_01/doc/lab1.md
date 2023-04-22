@@ -198,11 +198,11 @@
     3. Создать ветки dev / stg / prd, удалить ранее существующие ветки удаленно и локально
     Создадим фиктивную ветку fake
     ```
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git branch fake
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git branch
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git branch fake
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git branch
       fake
     * main
-    khrstln@LinuxUbuntu:/usr/local/Cpp_and_unix$ git push origin fake
+    dimasik@DESKTOP-KTOS6NV:/usr/local/Cpp_and_unix$ git push origin fake
     ```
     Создадим ветки dev, stg, prd
     ```
