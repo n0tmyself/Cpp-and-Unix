@@ -158,17 +158,17 @@
     3. Запустить образ (docker run)
     ```
     dimasik@DESKTOP-KTOS6NV:/usr/local$ sudo docker run -it myimage
-    root@37ae38a79cd2:/#
+   dimasik@DESKTOP-KTOS6NV:/#
     ```
     
     4. Выполнить скрипт, который подложили при сборке образа
     ```
-    root@37ae38a79cd2:/# ls
+    dimasik@DESKTOP-KTOS6NV:/# ls
     bin   date.sh  etc   lib    lib64   media  opt         proc  run   srv  tmp  var
     boot  dev      home  lib32  libx32  mnt    output.log  root  sbin  sys  usr
-    root@37ae38a79cd2:/# bash date.sh
+    dimasik@DESKTOP-KTOS6NV:/# bash date.sh
     Fri Mar 31 19:35:33 UTC 2023
-    root@37ae38a79cd2:/#
+    dimasik@DESKTOP-KTOS6NV:/#
     ```
     
     5.	Вывести список пользователей в собранном образе
