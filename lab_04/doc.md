@@ -245,18 +245,18 @@ int main() {
 
 1. Последовательные вычисления
 
-Time of 10000 loops: 0.001234 seconds
+Time of 10000 loops: 0.00 sec
 
-Time of 100000 loops: 0.013011 seconds
+Time of 100000 loops: 0.004 sec
 
 2. Параллельные вычисления с помощью потоков
 
-Time of 10000 loops: 0.009952 seconds
+Time of 10000 loops: 0.004 sec
 
-Time of 100000 loops: 0.146479 seconds
+Time of 100000 loops: 0.021 sec
 
 3. Параллельные вычисления с помощью процессов
 
-Time of 10000 loops is 0.000389 seconds
+Time of 10000 loops is 0.00017 sec
 
-Time of 100000 loops is 0.001281 seconds
+Time of 100000 loops is 0.000737 sec
