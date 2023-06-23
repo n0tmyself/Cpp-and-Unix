@@ -34,7 +34,7 @@ double time(const double &x, const int &n){
 
 int main() {
     double x = 2.15;
-    int n = 100000;
+    int n = 10000;
     double seconds = time(x, n);
     std::cout << "Time of " << n << " : " << seconds <<" sequence \n";
     return 0;

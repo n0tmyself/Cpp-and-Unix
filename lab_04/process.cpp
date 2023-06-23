@@ -31,7 +31,6 @@ int main() {
         return 1;
     } else if (pid1 == 0) {
         // First child process
-        
         float calc_1[n];
         for (int i = 0; i < n; i++) {
             close(pipe1[0]); // Close read end of pipe 1
