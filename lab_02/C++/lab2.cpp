@@ -26,7 +26,7 @@ int main()
     {
         float x = rand() % 2+100;
         int n; 
-        std::cout << "Enter the number of loops:" << endl;
+        std::cout << "Enter the number of loops:";
         std::cin >> n;
         if(!std::cin.good())
         {

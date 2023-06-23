@@ -26,7 +26,7 @@ double func3(const double &func1, const double &func2){
 
 int main(){
     double x = 2.15;
-    int n = 100000;
+    int n = 10000;
     double result1[n];
     double result2[n];
     double result3;

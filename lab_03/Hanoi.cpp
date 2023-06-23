@@ -22,10 +22,13 @@ int main() {
     cin >> n;
     list<string> steps;
     Tower(n, 'A', 'B', 'C', steps);
+    int k = 0;
 
     for (string step : steps) {
         cout << step << endl;
+        ++k;
     }
+    cout << "Number of steps: " << k << endl;
     steps.clear();
     return 0;
 }
