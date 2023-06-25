@@ -14,7 +14,7 @@ vector<string> var_names;
 
 void code_return(const string &error_name, vector<string> text, const string &j) {
     cout << error_name << endl;
-    for (int k = 0; k < size(text); k++) {
+    for (int k = 0; k < text.size(); k++) {
         if (text[k] == j) {
             cout << j << " <- error here";
         }
@@ -53,12 +53,12 @@ void initialization(vector<string> line) {
 }
 
 Variables_g var_search_int(const string &name) {
-    if (size(var_int) == 0) {
+    if (var_int.size() == 0) {
         Variables_g NoFound;
         NoFound.set_variable("NoFound", "int", "0");
         return NoFound;
     }
-    for (int i = 0; i <= size(var_int); i++) {
+    for (int i = 0; i <= var_int.size(); i++) {
         if (var_int[i].var_get_name() == name) {
             return var_int[i];
         }
@@ -69,12 +69,12 @@ Variables_g var_search_int(const string &name) {
 }
 
 Var_string var_search_str(const string &name) {
-    if (size(var_str) == 0) {
+    if (var_str.size() == 0) {
         Var_string NoFound;
         NoFound.set_variable("NoFound", "int", "0");
         return NoFound;
     }
-    for (int i = 0; i <= size(var_str); i++) {
+    for (int i = 0; i <= var_str.size(); i++) {
         if (var_str[i].var_get_name() == name) {
             return var_str[i];
         }
@@ -92,7 +92,7 @@ void overwrite(const string &name, const string &value) {
     int flag = -1;
     string var_type;
     if (var_search_int(name).var_get_name() == "NoFound") {
-        for (int l = 0; l < size(var_str); l++) {
+        for (int l = 0; l < var_str.size(); l++) {
             if (var_str[l].var_get_name() == name) {
                 flag = l;
             }
@@ -102,7 +102,7 @@ void overwrite(const string &name, const string &value) {
         v1.set_variable(name, var_type, value);
         var_str.insert(var_str.begin() + flag, v1);
     } else {
-        for (int l = 0; l < size(var_int); l++) {
+        for (int l = 0; l < var_int.size(); l++) {
             if (var_int[l].var_get_name() == name) {
                 flag = l;
                 var_type = var_int[l].var_get_type();
@@ -117,7 +117,7 @@ void overwrite(const string &name, const string &value) {
 
 int compiler(vector<string> text) {
     int lines_iterator = 0;
-    int len_code = size(text);
+    int len_code = text.size();
     for (int j_it = 0; j_it < len_code; j_it++) {
         string j = text[j_it];
         vector<string> line;
@@ -187,7 +187,7 @@ int compiler(vector<string> text) {
                 if (text[t] == "%") {
                     flag_input = -1;
                 }
-                if (flag_input == 1 and t + 1 < size(text)) {
+                if (flag_input == 1 and t + 1 < text.size()) {
                     loop_sent = text[t + 1];
                     loop_inside.push_back(loop_sent);
                 } else if (flag_input == -1) {
@@ -197,13 +197,13 @@ int compiler(vector<string> text) {
                 t++;
             }
             for (int n = 0; n < num_repeats; n++) {
-                text.insert(text.begin() + lines_iterator + n * size(loop_inside), loop_inside.begin(),
+                text.insert(text.begin() + lines_iterator + n * loop_inside.size(), loop_inside.begin(),
                             loop_inside.end());
             }
-            int del_beg = lines_iterator + num_repeats * size(loop_inside);
-            int del_end = lines_iterator + (num_repeats + 1) * size(loop_inside) + 2;
+            int del_beg = lines_iterator + num_repeats * loop_inside.size();
+            int del_end = lines_iterator + (num_repeats + 1) * loop_inside.size() + 2;
             text.erase(text.begin() + del_beg, text.begin() + del_end);
-            len_code = size(text);
+            len_code = text.size();
         } else if (line[0] == "*") {
             vector<string> child_inside;
             int t = 0;
@@ -216,7 +216,7 @@ int compiler(vector<string> text) {
                 if (text[t] == "#") {
                     flag_input = -1;
                 }
-                if (flag_input == 1 and t + 1 < size(text)) {
+                if (flag_input == 1 and t + 1 < text.size()) {
                     child_sent = text[t + 1];
                     child_inside.push_back(child_sent);
                 } else if (flag_input == -1) {
@@ -226,9 +226,9 @@ int compiler(vector<string> text) {
                 t++;
             }
             int del_beg_f = lines_iterator;
-            int del_end_f = lines_iterator + size(child_inside) + 2;
+            int del_end_f = lines_iterator + child_inside.size() + 2;
             text.erase(text.begin() + del_beg_f, text.begin() + del_end_f);
-            len_code = size(text);
+            len_code = text.size();
             pid_t pid = fork();
             if (pid == 0) {
                 compiler(child_inside);
@@ -258,10 +258,11 @@ int compiler(vector<string> text) {
         }
         lines_iterator++;
     }
+return 1;
 }
 
 int main() {
-    cout << "Welcome to Gecko.alpha!" << endl;
+    cout << "Welcome to DA" << endl;
     cout << "Finish the entering by ~" << endl;
     cout << "The variables initialization begins from ! vType vName value" << endl;
     cout << "Changes made by 'V1 = V2 + V3'" << endl;
