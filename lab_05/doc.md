@@ -8,6 +8,7 @@
 
 ## Отчет ##
 
+main.cpp
 ```C++
 #include <iostream>
 #include <string>
@@ -293,4 +294,75 @@ int main() {
     compiler(text);
     return 0;
 }
-'''
+```
+varibales_g.cpp
+```C++
+#include "variables_g.h"
+#include <utility>
+
+int Variables_g::var_get_val() const {
+    return value;
+}
+
+std::string Variables_g::var_get_name() const {
+    return var_name;
+}
+
+std::string Variables_g::var_get_type() const {
+    return var_type;
+}
+
+void Variables_g::set_variable(std::string name, std::string type, std::string val) {
+    var_type = std::move(type);
+    var_name = std::move(name);
+    value = stoi(val);
+}
+
+void Var_string::set_variable(std::string name, std::string type, std::string val) {
+    var_type = std::move(type);
+    var_name = std::move(name);
+    value = std::move(val);
+}
+
+void Variables_g::var_set_val(int val) {
+    value = val;
+}
+
+void Var_string::var_set_val(std::string val) {
+    value = std::move(val);
+}
+```
+variables.h
+```C++
+#ifndef CPP_UNIX1_VARIABLES_G_H
+#define CPP_UNIX1_VARIABLES_G_H
+#include <string>
+
+class Variables_g {
+    //default integer variable
+public:
+    virtual void set_variable(std::string name, std::string type, std::string val);
+    int var_get_val() const;
+    void var_set_val(int a);
+    std::string var_get_name() const;
+    std::string var_get_type() const;
+private:
+    //int || string
+    int value;
+protected:
+    //variable name and type
+    std::string var_type {"int"};
+    std::string var_name {"None"};
+};
+
+class Var_string : public Variables_g{
+private:
+    std::string value;
+public:
+    void set_variable(std::string name, std::string type, std::string val);
+    void var_set_val(std::string a);
+    std::string var_get_val(){return value;}
+};
+
+#endif //CPP_UNIX1_VARIABLES_G_H
+```
