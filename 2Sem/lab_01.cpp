@@ -47,8 +47,6 @@ int partition(std::vector<int>& values, int l, int r)
 
 void QuickSort(std::vector<int>& values, int l, int r)
 {
-    // int l = 0;
-    // int r = values.size() - 1;
     if (l < r)
     {
         int p = partition(values, l, r);
@@ -65,10 +63,11 @@ int main()
 
 
     // std::vector<int> vec = {5, 0, 1, 6, 3, 100 , 3, 40, 41, 40, 3, 6};
+    std::vector<int> vec = {9, 8, 5, 6, 7};
 
-    std::vector<int> vec(size, 0);
-    srand(time(0));
-    generate(vec.begin(), vec.end(), rand);
+    // std::vector<int> vec(size, 0);
+    // srand(time(0));
+    // generate(vec.begin(), vec.end(), rand);
 
     std::cout << "Random: ";
     for(size_t i = 0; i < vec.size(); ++i)
