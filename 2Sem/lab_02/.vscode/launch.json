@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/GitHub/WorkSpace/Cpp-and-Unix/2Sem",
-      "program": "d:/GitHub/WorkSpace/Cpp-and-Unix/2Sem/build/Debug/outDebug",
+      "cwd": "d:/GitHub/WorkSpace/Cpp-and-Unix/2Sem/lab_02",
+      "program": "d:/GitHub/WorkSpace/Cpp-and-Unix/2Sem/lab_02/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
