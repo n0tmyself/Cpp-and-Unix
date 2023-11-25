@@ -7,10 +7,13 @@
 
 using namespace std;
 
+
 int main()
 {
 
-    int n = 5;
+
+
+    int n = 6;
     // cin >> n;
 
     double x[n], y[n];
@@ -23,7 +26,7 @@ int main()
         x[i] = dist(rd);
         y[i] = dist(rd);
 
-        // cout << x[i] << " " << y[i] << endl;
+        cout << x[i] << " " << y[i] << endl;
     }
 
     double matrix_of_cities[n][n];
@@ -37,7 +40,6 @@ int main()
         }
     }
 
-    // если хочется посмотреть на матрицу, можно раскомментить
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
@@ -47,7 +49,7 @@ int main()
         cout << endl;
     }
 
-    double h[1 << n][n];
+    double h[1 << n][n]; // h[mask][u] путь проходящий через вершины, соответсвуюший маске, заканчивающийся в вершине u (u не входит в маску)
 
     for (int i = 0; i < (1 << n); i++)
     {
@@ -61,26 +63,26 @@ int main()
 
     double best = INT_MAX;
 
-    for (int mask = 0; mask < (1 << n); mask++)
+    for (int mask = 0; mask < (1 << n); mask++) // пробегаемся по маскам
     {
-        for (int u = 0; u < n; u++)
+        for (int u = 0; u < n; u++) // пробегаемся по вершинам u
         {
-            if (h[mask][u] != INT_MAX)
+            if (h[mask][u] != INT_MAX) // смотрим только туда, где еще не были
             {
-                int new_mask = mask | (1 << u);
+                int new_mask = mask | (1 << u); // записываем u в новую маску
 
-                for (int v = 0; v < n; v++)
+                for (int v = 0; v < n; v++) // пробегаемся по вершинам на следующий шаг
                 {
-                    double weight = matrix_of_cities[u][v];
+                    double weight = matrix_of_cities[u][v]; // записываем вес ребра
 
-                    if (((new_mask & (1 << v))) == 0)
+                    if (((new_mask & (1 << v))) == 0) // смотрим только туда, где еще не были
                     {
-                        if (h[mask][u] + weight < h[new_mask][v])
+                        if (h[mask][u] + weight < h[new_mask][v]) // проверяем путь на оптимальность
                         {
-                            h[new_mask][v] = h[mask][u] + weight;
+                            h[new_mask][v] = h[mask][u] + weight; // если оптимальнее, то сохраняем его
                         }
                     }
-                    if ((v == 0) && (new_mask == (1 << n) - 1) && (h[mask][u] + weight < best))
+                    if ((v == 0) && (new_mask == (1 << n) - 1) && (h[mask][u] + weight < best)) // если прошли всех и результат улучшули, сохраняем
                     {
                         best = h[mask][u] + weight;
                     }
@@ -88,6 +90,8 @@ int main()
             }
         }
     }
+
+
 
     cout << "best = " << best << endl;
 }
