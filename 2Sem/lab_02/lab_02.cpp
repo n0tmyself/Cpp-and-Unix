@@ -10,24 +10,33 @@ using namespace std;
 
 int main()
 {
-
-
-
-    int n = 6;
+    int n = 4;
     // cin >> n;
 
     double x[n], y[n];
 
-    random_device rd;
-    uniform_real_distribution<> dist(0, 15);
+    // random_device rd;
+    // uniform_real_distribution<> dist(0, 15);
     
+    // for (int i = 0; i < n; i++)
+    // {
+    //     x[i] = dist(rd);
+    //     y[i] = dist(rd);
+
+    //     cout << x[i] << " " << y[i] << endl;
+    // }
+    // cout << endl;
+    x[0] = 13.3192; y[0] = 14.4447;
+    x[1] = 12.5049; y[1] = 7.80748;
+    x[2] = 7.16021; y[2] = 6.72373;
+    x[3] = 2.81006; y[3] = 12.9653;
+
     for (int i = 0; i < n; i++)
     {
-        x[i] = dist(rd);
-        y[i] = dist(rd);
 
-        cout << x[i] << " " << y[i] << endl;
+        std::cout << x[i] << " " << y[i] << endl;
     }
+    std::cout << endl;
 
     double matrix_of_cities[n][n];
 
@@ -44,10 +53,11 @@ int main()
     {
         for (int j = 0; j < n; j++)
         {
-            cout << fixed << setprecision(2) << matrix_of_cities[i][j] << " ";
+            std::cout << fixed << setprecision(2) << matrix_of_cities[i][j] << " ";
         }
-        cout << endl;
+        std::cout << endl;
     }
+    
 
     double h[1 << n][n]; // h[mask][u] путь проходящий через вершины, соответсвуюший маске, заканчивающийся в вершине u (u не входит в маску)
 
@@ -63,14 +73,16 @@ int main()
 
     double best = INT_MAX;
 
+    int new_mask = 0;
+
     for (int mask = 0; mask < (1 << n); mask++) // пробегаемся по маскам
     {
         for (int u = 0; u < n; u++) // пробегаемся по вершинам u
         {
             if (h[mask][u] != INT_MAX) // смотрим только туда, где еще не были
             {
-                int new_mask = mask | (1 << u); // записываем u в новую маску
-
+                int new_mask = mask | (1 << u); // записываем u в новую маску 1001 and  0011  -> 1011
+ 
                 for (int v = 0; v < n; v++) // пробегаемся по вершинам на следующий шаг
                 {
                     double weight = matrix_of_cities[u][v]; // записываем вес ребра
@@ -91,7 +103,13 @@ int main()
         }
     }
 
+    // for (int i = 0; i < n; i++)
+    // {
+
+    //     std::cout << x[i] << " " << y[i] << endl;
+    // }
 
 
-    cout << "best = " << best << endl;
+    std::cout << endl;
+    std::cout << "best = " << best << endl;
 }
