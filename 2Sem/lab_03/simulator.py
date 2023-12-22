@@ -124,9 +124,9 @@ class Simulator:
         for gen in self.vehicleGens:
             gen.update()
             if (self.t >= 870 and self.t <= 990) or (self.t >= 1020 and self.t <= 1080):
-                gen.vehicleRate = 100
+                gen.vehicleRate = 30
             else:
-                gen.vehicleRate = 40
+                gen.vehicleRate = 20
         self.t += self.dt
 
         if self.t >= 1440:

@@ -31,7 +31,7 @@ def action_3():
 # Параллельное выполнение с использованием subprocess
 start_time = time.time()
 
-subprocess.run(["python", "action_1.py", str(U1)])
+subprocess.Popen(["python", "action_1.py"])
 subprocess.run(["python", "action_2.py", str(U2)])
 subprocess.run(["python", "action_3.py", str(U3)])
 

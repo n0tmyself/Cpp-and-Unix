@@ -26,18 +26,18 @@ Graph = [((150, 20), (11,)),  # 0
          ]
 firstSimulation.createRoadsFromGraph(Graph)
 
-firstSimulation.optimizer = True
+firstSimulation.optimizer = False
 print(firstSimulation.optimizer)
 
 firstSimulation.createGen({
     'vehicleRate': 40,
     'vehicles': [
-        [1, {"path": [(0, 11), (11, 1), (1, 2)]}],
-        # [1, {"path": [(3, 12), (12, 11), (11, 1), (1, 4), (4, 5)]}],
-        # [1, {"path": [(12, 11)]}],
-        [1, {"path": [(4, 12)]}],
+        [1, {"path": [(0, 11), (11, 12), (12, 4), (4, 1), (1, 2)]}],
+        [1, {"path": [(4, 5)]}],
+        [1, {"path": [(4, 5)]}],
         [1, {"path": [(3, 12)]}],
-        [1, {"path": [(15, 14), (14, 12), (12, 11), (11, 1), (1, 4), (4, 6), (6, 7)]}],
+        [1, {"path": [(3, 12)]}],
+        [1, {"path": [(15, 14), (14, 12), (12, 4), (4, 6), (6, 7)]}],
     ]
 })
 

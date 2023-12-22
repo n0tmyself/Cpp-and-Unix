@@ -2,7 +2,7 @@ import threading
 import time
 
 # Время обработки для каждого действия
-T1 = 2
+T1 = 0.1
 T2 = 1
 T3 = 0.5
 
