@@ -62,7 +62,7 @@ class Vehicle:
         self.moodToRide -= 5
         if self.moodToRide < 0:
             self.moodToRide = 0
-        return random.randrange(0, 1) < self.moodToRide
+        return 0 < self.moodToRide
 
     def stopVehicle(self):
         self.stopped = True

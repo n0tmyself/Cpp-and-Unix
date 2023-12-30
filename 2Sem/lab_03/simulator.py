@@ -3,7 +3,7 @@ from vehicleGenerator import VehicleGenerators
 from copy import deepcopy
 import random
 from collections import deque
-from load import Load
+# from load import Load
 import numpy as np
 
 
@@ -12,6 +12,8 @@ class Simulator:
     def __init__(self, config={}):
         # Setting default configuration
         self.set_default_config()
+        self.n = [0] * 36
+        self.num = [0] * 36
 
         # Updating configuration
         for attr, val in config.items():
@@ -20,10 +22,11 @@ class Simulator:
     def set_default_config(self):
         # Time keeping
         self.t = 840.0
+        self.timeInterval = 10
         # Frame count keeping
         self.frame_count = 0
         # Simulation time step
-        self.dt = 1 / 60
+        self.dt = 0.02
         # Array to store roads
         self.roads = {}
         self.vehicleGens = deque()
@@ -80,6 +83,19 @@ class Simulator:
         for road_key, load in self.loads.items():
             load.update(self.dt, self.t)
 
+        i = 0
+        for roadKey, road in self.roads.items():
+            self.n[i] = max(self.n[i], len(road.vehicles))
+            i += 1
+
+        if self.t % self.timeInterval == 0:
+            # print(self.t, self.t % 15)
+            # print(self.n)
+            self.num = self.n
+            self.n = [0] * 36
+
+        k = 0
+        # print(k)
         # Checking the roads for out of bounds vehicle
         for road_key, road in self.roads.items():
             # If road does not have vehicles, then continue
@@ -94,13 +110,15 @@ class Simulator:
                     crossRoad = self.graph[road.endCross]
                     if len(crossRoad[1]) > 1:
                         if newVehicle.decideToRide():
-                            carNums = [len(self.roads[(road.endCross, k)].vehicles) for k in crossRoad[1]]
+                            # carNums = [len(self.roads[(road.endCross, k)].vehicles) for k in crossRoad[1]]
+                            carNums = [self.num[j] for j in crossRoad[1]]
                             minNum = min(carNums)
                             minIdx = [i for i, x in enumerate(carNums) if x == minNum]
-                            if self.optimizer:
+                            if not(self.optimizer):
                                 nextCross = crossRoad[1][random.choice(minIdx)]
                             else:
                                 nextCross = crossRoad[1][random.choice([i for i in range(len(crossRoad[1]))])]
+                            k += 1
                             self.roads[(road.endCross, nextCross)].vehicles.append(newVehicle)
                         else:
                             pass
@@ -124,10 +142,10 @@ class Simulator:
         for gen in self.vehicleGens:
             gen.update()
             if (self.t >= 870 and self.t <= 990) or (self.t >= 1020 and self.t <= 1080):
-                gen.vehicleRate = 30
+                gen.vehicleRate = 40
             else:
-                gen.vehicleRate = 20
-        self.t += self.dt
+                gen.vehicleRate = 30
+        self.t = round(self.dt + self.t, 2)
 
         if self.t >= 1440:
             self.t = 0

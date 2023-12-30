@@ -8,5 +8,5 @@ from TrafficSignal import TrafficSignal
 from Vehicles import Vehicle
 from vehicleGenerator import VehicleGenerators
 from simulator import Simulator
-from load import Load
+# from load import Load
 from window import Window

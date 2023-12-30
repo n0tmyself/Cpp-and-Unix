@@ -3,6 +3,8 @@ from pygame import gfxdraw
 import numpy as np
 from datetime import time
 
+import simulator
+
 
 class Window:
     def __init__(self, simulator, config={}):
@@ -162,7 +164,9 @@ class Window:
         hours = int(self.simulator.t // 60)
         minutes = int(self.simulator.t % 60)
         my_time = time(hours, minutes)
+        time_int = time(0, self.simulator.timeInterval)
         self.the_text(f'current time: {my_time.strftime("%H:%M")}', 20, 20)
+        self.the_text(f'Update interval: {time_int.strftime("%H:%M")}', 220, 20)
 
     def drawVehicles(self):
         for road_key, road in self.simulator.roads.items():
@@ -175,7 +179,7 @@ class Window:
                     self.the_circle(position)
 
 
-    def drawLoad(self, x, y, trafficCycle=10, high_load=50):
+    def drawLoad(self, x, y, trafficCycle=10, high_load=90):
         y_i = y
         red_text = (200, 0, 0)
         yellow_text = (210, 210, 0)
@@ -183,9 +187,12 @@ class Window:
         self.the_text('Highest traffic:', x, y_i)
         y_i += 20
         load_top = []
+        i = 0
         for key, road in self.simulator.roads.items():
-            load = round(self.simulator.loads[key].getLoad())
-            num_of_vehicles = len(road.vehicles)
+            # load = round(self.simulator.loads[key].getLoad())
+            load = round(self.simulator.num[i] * 4 / road.length * 100)
+            num_of_vehicles = self.simulator.num[i]
+            i += 1
             if load > 0:
                 if load <= high_load:
                     load_top.append([load, f'{road.startCross, road.endCross}: {num_of_vehicles}, {load} %', green_text])
@@ -206,19 +213,19 @@ class Window:
                         #     f'{road.startCross, road.endCross}: {num_of_vehicles}, {load} %', x, y_i, red_text)
 
 
-                if road.hasTrafficSignal and load >= high_load:
-                    car = road.vehicles[-1]
-                    if not road.trafficSignalState:
-                        additionalTime = trafficCycle - (self.simulator.t % trafficCycle)
-                    else:
-                        additionalTime = 0
-                    timeToDissolve = round((road.length - car.x) / car.vMax + additionalTime, 1)
-                    load_top[-1][1] += '; dissolving in: ' + str(timeToDissolve)
-                    # self.the_text('dissolving in: ' + str(timeToDissolve), x + 180, y_i)
-                    if load >= 90:
-                        duration = round(self.simulator.loads[key].getDurationOver90(self.simulator.t), 1)
-                        load_top[-1][1] += '; duration: ' + str(duration)
-                        # self.the_text('duration: ' + str(duration), x + 380, y_i)
+                # if road.hasTrafficSignal and load >= high_load:
+                #     car = road.vehicles[-1]
+                #     if not road.trafficSignalState:
+                #         additionalTime = trafficCycle - (self.simulator.t % trafficCycle)
+                #     else:
+                #         additionalTime = 0
+                #     timeToDissolve = round((road.length - car.x) / car.vMax + additionalTime, 1)
+                #     load_top[-1][1] += '; dissolving in: ' + str(timeToDissolve)
+                #
+                #     if load >= 90:
+                #         duration = round(self.simulator.loads[key].getDurationOver90(self.simulator.t), 1)
+                #         load_top[-1][1] += '; duration: ' + str(duration)
+
 
         load_top.sort(key=lambda x: x[0], reverse=True)
         if len(load_top) >= 0:

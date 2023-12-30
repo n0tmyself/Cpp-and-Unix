@@ -26,18 +26,34 @@ Graph = [((150, 20), (11,)),  # 0
          ]
 firstSimulation.createRoadsFromGraph(Graph)
 
-firstSimulation.optimizer = False
+firstSimulation.optimizer = True
 print(firstSimulation.optimizer)
 
 firstSimulation.createGen({
     'vehicleRate': 40,
     'vehicles': [
         [1, {"path": [(0, 11), (11, 12), (12, 4), (4, 1), (1, 2)]}],
-        [1, {"path": [(4, 5)]}],
-        [1, {"path": [(4, 5)]}],
+        [1, {"path": [(0, 11)]}],
         [1, {"path": [(3, 12)]}],
+        [1, {"path": [(15, 14)]}],
+        [1, {"path": [(8, 13)]}],
+        [1, {"path": [(2, 1)]}],
+        [1, {"path": [(5, 4)]}],
+        [1, {"path": [(7, 6)]}],
+        [1, {"path": [(10, 9)]}],
+        [1, {"path": [(0, 11)]}],
         [1, {"path": [(3, 12)]}],
-        [1, {"path": [(15, 14), (14, 12), (12, 4), (4, 6), (6, 7)]}],
+        [1, {"path": [(15, 14)]}],
+        [1, {"path": [(8, 13)]}],
+        [1, {"path": [(2, 1)]}],
+        [1, {"path": [(5, 4)]}],
+        [1, {"path": [(7, 6)]}],
+        [1, {"path": [(10, 9)]}],
+        # [1, {"path": [(3, 12)]}],
+        # [1, {"path": [(3, 12)]}],
+        # [1, {"path": [(3, 12)]}],
+        # [1, {"path": [(3, 12)]}],
+        # [1, {"path": [(15, 14), (14, 12), (12, 4), (4, 6), (6, 7)]}],
     ]
 })
 
@@ -76,7 +92,7 @@ firstSimulation.createTrafficSignal(trafficSignal5)
 firstSimulation.createTrafficSignal(trafficSignal6)
 firstSimulation.createTrafficSignal(trafficSignal7)
 firstSimulation.createTrafficSignal(trafficSignal8)
-firstSimulation.createLoads()
+# firstSimulation.createLoads()
 
 # Starting the simulation
 firstWindow = Window(firstSimulation)

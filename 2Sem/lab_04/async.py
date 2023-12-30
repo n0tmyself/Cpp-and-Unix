@@ -6,28 +6,30 @@ T1 = 0.1
 T2 = 1
 T3 = 0.5
 
-# Нагрузка на процессор для каждого действия
-CPU_LOAD_T1 = 25
-CPU_LOAD_T2 = 15
-CPU_LOAD_T3 = 1
-
 # Количество пользователей для каждого действия
 U1 = 5
 U2 = 10
 U3 = 20
 
+
 # Параллельное выполнение с использованием asyncio
-async def async_action_1():
+async def async_action_1(x=1):
+    print(x ** 2)
     await asyncio.sleep(T1)
     print("Действие 1 выполнено")
 
-async def async_action_2():
+
+async def async_action_2(x=2):
+    print(x ** 2)
     await asyncio.sleep(T2)
     print("Действие 2 выполнено")
 
-async def async_action_3():
+
+async def async_action_3(x=3):
+    print(x ** 2)
     await asyncio.sleep(T3)
     print("Действие 3 выполнено")
+
 
 async def main():
     tasks = []
@@ -42,6 +44,10 @@ async def main():
 
     await asyncio.gather(*tasks)
 
+
 start_time = time.time()
 asyncio.run(main())
-print("Параллельное выполнение с использованием asyncio заняло %s секунд" % (time.time() - start_time))
+end_time = time.time() - start_time
+print("Параллельное выполнение с использованием asyncio заняло %s секунд" % end_time)
+
+# print(type(tasks))
