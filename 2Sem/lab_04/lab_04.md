@@ -50,13 +50,13 @@ threads (3), asyncio (4)
 
 ### Время работы различных реализаций
 
-$$t_{\text{sequential}} \approx 37.52 \text{ seconds}$$
+$$t_{\text{sequential}} \approx 20.8 \text{ seconds}$$
 
-$$t_{\text{threading}} \approx 2.00 \text{ seconds}$$
+$$t_{\text{threading}} \approx 1.02 \text{ seconds}$$
 
-$$t_{\text{asyncio}} \approx 2.01 \text{ seconds}$$
+$$t_{\text{asyncio}} \approx 1.02 \text{ seconds}$$
 
-$$t_{\text{multiprocessing}} \approx 3.15 \text{ seconds}$$
+$$t_{\text{multiprocessing}} \approx 1.27 \text{ seconds}$$
 
 
 
